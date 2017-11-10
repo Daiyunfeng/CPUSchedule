@@ -75,16 +75,7 @@ public class CPU
 
 	private void setSchedule() throws Exception
 	{
-		System.out.println("调度算法:");
-		System.out.println("0:First Come First Served");
-		System.out.println("1:Shortest Job First");
-		System.out.println("2:Shortest Remaining Time First");
-		System.out.println("3:Priority 非抢占");
-		System.out.println("4:Round Robin");
-		System.out.println("选择CPU调度算法");
-		int choice;
-		Scanner scan = new Scanner(System.in);
-		choice = scan.nextInt();
+		int choice = ScheduleFactory.getChoice();
 		this.schedule = ScheduleFactory.getSchedule(choice, progresses);
 	}
 }
