@@ -36,11 +36,15 @@ public class ScheduleFactory
 			return new PrioritySchedule(progresses);
 		case Round_Robin:
 			return new RoundRobinSchedule(progresses);
+		case Multilevel_Queue:
+			return new MultilevelQueueSchedule(progresses);
+		case Multilevel_Feedback_Queue:
+			return new MultilevelFeedbackQueueSchedule(progresses);
 		default:
 			throw new Exception("ID错误 没有此调度算法");
 		}
 	}
-	
+
 	public static int getChoice()
 	{
 		System.out.println("调度算法:");
@@ -49,7 +53,8 @@ public class ScheduleFactory
 		System.out.println("2:Shortest Remaining Time First");
 		System.out.println("3:Priority 非抢占");
 		System.out.println("4:Round Robin");
-		System.out.println("5:Multilevel_Queue");
+		System.out.println("5:Multilevel Queue");
+		System.out.println("6:Multilevel Feedback Queue");
 		System.out.println("选择CPU调度算法");
 		int choice;
 		Scanner scan = new Scanner(System.in);

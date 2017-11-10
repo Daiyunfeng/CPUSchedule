@@ -16,7 +16,7 @@ import hznu.hjc.model.Progress;
  * @author Administrator
  * @data 2017年11月10日
  */
-public class MultilevelQueueSchedule extends AbstractSchedule
+public class MultilevelFeedbackQueueSchedule extends AbstractSchedule
 {
 	private int priority1, priority2, timeSlicing1, timeSlicing2;
 	private Queue<Progress> q1; // timeSlicing1 轮转
@@ -24,7 +24,7 @@ public class MultilevelQueueSchedule extends AbstractSchedule
 	private Queue<Progress> q3; // FCFS
 	int count = 0, time, endTime;
 
-	public MultilevelQueueSchedule(List<Progress> progresses)
+	public MultilevelFeedbackQueueSchedule(List<Progress> progresses)
 	{
 		super(progresses);
 		// TODO 自动生成的构造函数存根
@@ -95,7 +95,7 @@ public class MultilevelQueueSchedule extends AbstractSchedule
 			}
 			if (!flag)
 			{
-				q1.offer(progress); // 放在队列最后
+				q2.offer(progress); // 放在q2队列最后
 			}
 		}
 		q2Working();
@@ -136,7 +136,7 @@ public class MultilevelQueueSchedule extends AbstractSchedule
 			}
 			if (!flag)
 			{
-				q2.offer(progress); // 放在队列最后
+				q3.offer(progress); // 放在q3队列最后
 			}
 			//优先级高的在等待
 			if(q1.size()!=0)

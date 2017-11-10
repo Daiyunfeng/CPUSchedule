@@ -25,7 +25,7 @@ public class CPU
 
 	public CPU(String fileName)
 	{
-		this.fileName=fileName;
+		this.fileName = fileName;
 		progresses = new ArrayList<>();
 	}
 
