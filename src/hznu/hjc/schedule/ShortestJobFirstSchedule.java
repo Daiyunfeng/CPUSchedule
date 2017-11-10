@@ -21,7 +21,7 @@ public class ShortestJobFirstSchedule extends AbstractSchedule
 		// TODO 自动生成的方法存根
 		progresses.sort(Progress.SortByArrivedTime);
 		PriorityQueue<Progress> q = new PriorityQueue<>(Progress.SortByRunTime); // 运行时间排序的优先队列
-		int count = 0,time,endTime;
+		int count = 0, time, endTime;
 		Progress progress;
 		q.add(new Progress(progresses.get(count)));
 		time = progresses.get(count).getArrivedTime();
@@ -38,8 +38,8 @@ public class ShortestJobFirstSchedule extends AbstractSchedule
 			}
 			progress = q.poll();
 			endTime = time + progress.getRunTime();
-			operatingSequences.add(new OperatingSequence(progress,time ,endTime,true));
-			time =endTime;
+			operatingSequences.add(new OperatingSequence(progress, time, endTime, true));
+			time = endTime;
 			while (count < progresses.size())
 			{
 				if (progresses.get(count).getArrivedTime() <= time)
@@ -54,5 +54,5 @@ public class ShortestJobFirstSchedule extends AbstractSchedule
 			}
 		}
 	}
-	
+
 }

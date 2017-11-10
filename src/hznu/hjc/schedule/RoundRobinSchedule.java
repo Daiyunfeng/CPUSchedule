@@ -61,7 +61,7 @@ public class RoundRobinSchedule extends AbstractSchedule
 			progress = q.poll();
 			if (progress.getRunTime() <= timeSlicing) // 一个时间片就结束了
 			{
-				flag = true;	//结束
+				flag = true; // 结束
 				endTime = time + progress.getRunTime();
 				operatingSequences.add(new OperatingSequence(progress, time, endTime, true));
 			}

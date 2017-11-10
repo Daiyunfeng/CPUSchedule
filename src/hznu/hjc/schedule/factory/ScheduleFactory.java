@@ -15,7 +15,7 @@ public class ScheduleFactory
 {
 
 	public final static int First_Come_First_Served = 0, Shortest_Job_First = 1, Shortest_Remaining_Time_First = 2,
-			Priority = 3, Round_Robin = 4;
+			Priority = 3, Round_Robin = 4, Multilevel_Queue = 5, Multilevel_Feedback_Queue = 6;;
 
 	private ScheduleFactory()
 	{
