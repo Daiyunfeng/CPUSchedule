@@ -26,6 +26,8 @@ public class ScheduleFactory
 		{
 		case First_Come_First_Served:
 			return new FirstComeFirstServedSchedule(progresses);
+		case Shortest_Job_First:
+			return new ShortestJobFirstSchedule(progresses);
 		case Shortest_Remaining_Time_First:
 			return new ShortestRemainingTimeFirstSchedule(progresses);
 		case Round_Robin:

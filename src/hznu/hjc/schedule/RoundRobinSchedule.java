@@ -44,29 +44,30 @@ public class RoundRobinSchedule extends AbstractSchedule
 		Queue<Progress> q = new LinkedList<Progress>();
 		int count = 0, time, endTime;
 		Progress progress;
-		Boolean flag ;
-		q.offer(new Progress(progresses.get(count++)));
-		time = progresses.get(0).getArrivedTime();
+		Boolean flag;
+		q.offer(new Progress(progresses.get(count)));
+		time = progresses.get(count).getArrivedTime();
+		count++;
 		while (q.size() != 0 || count < progresses.size())
 		{
 			if (q.size() == 0)
 			{
 				// 等待下一个进程
 				time = progresses.get(count).getArrivedTime();
-				q.add(new Progress(progresses.get(count))); // 深拷贝
+				q.offer(new Progress(progresses.get(count))); // 深拷贝
 				count++;
 				continue;
 			}
 			progress = q.poll();
 			if (progress.getRunTime() <= timeSlicing) // 一个时间片就结束了
 			{
-				flag =true;
+				flag = true;	//结束
 				endTime = time + progress.getRunTime();
 				operatingSequences.add(new OperatingSequence(progress, time, endTime, true));
 			}
 			else
 			{
-				flag =false;
+				flag = false;
 				endTime = time + timeSlicing;
 				operatingSequences.add(new OperatingSequence(progress, time, endTime, true));
 				progress.setRunTime(progress.getRunTime() - timeSlicing);
@@ -76,7 +77,7 @@ public class RoundRobinSchedule extends AbstractSchedule
 			{
 				if (progresses.get(count).getArrivedTime() <= time)
 				{
-					q.add(new Progress(progresses.get(count))); // 深拷贝
+					q.offer(new Progress(progresses.get(count))); // 深拷贝
 					count++;
 				}
 				else
@@ -84,9 +85,9 @@ public class RoundRobinSchedule extends AbstractSchedule
 					break;
 				}
 			}
-			if(!flag)
+			if (!flag)
 			{
-				q.offer(progress);	//放在队列最后
+				q.offer(progress); // 放在队列最后
 			}
 		}
 	}
