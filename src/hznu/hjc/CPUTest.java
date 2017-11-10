@@ -20,8 +20,9 @@ public class CPUTest
 	@Test
 	public void test()
 	{
-		CPU cpu = new CPU();
+		CPU cpu = new CPU("C:\\Users\\lenovo\\Desktop\\input.txt");
 		cpu.SimulationScheduling();
 	}
+	
 
 }

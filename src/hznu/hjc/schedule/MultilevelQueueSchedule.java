@@ -1,6 +1,7 @@
 package hznu.hjc.schedule;
 
 import java.util.List;
+import java.util.Scanner;
 
 import hznu.hjc.model.Progress;
 /**
@@ -22,7 +23,11 @@ public class MultilevelQueueSchedule extends AbstractSchedule
 
 	private void init()
 	{
-		
+		Scanner in = new Scanner(System.in);
+		System.out.print("最高优先级队列优先级范围1-");
+		priority1 = in.nextInt();
+		System.out.print("最高优先级队列时间片:");
+		timeSlicing1 = in.nextInt();
 	}
 	
 	@Override

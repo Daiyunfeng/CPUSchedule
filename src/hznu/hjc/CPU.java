@@ -18,13 +18,14 @@ import hznu.hjc.schedule.factory.ScheduleFactory;
  */
 public class CPU
 {
-	private final static String fileName = "C:\\Users\\Administrator\\Desktop\\input.txt";
+	private String fileName = "C:\\Users\\Administrator\\Desktop\\input.txt";
 	private int n;
 	private AbstractSchedule schedule;
 	private List<Progress> progresses;
 
-	public CPU()
+	public CPU(String fileName)
 	{
+		this.fileName=fileName;
 		progresses = new ArrayList<>();
 	}
 
