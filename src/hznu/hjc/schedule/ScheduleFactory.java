@@ -5,7 +5,7 @@ import java.util.List;
 import hznu.hjc.model.Progress;
 
 /**
- * CPU调度
+ * CPU调度工厂
  * @author Administrator
  * @data 2017年11月9日
  */

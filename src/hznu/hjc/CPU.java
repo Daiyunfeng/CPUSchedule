@@ -1,20 +1,20 @@
 package hznu.hjc;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import hznu.hjc.model.OperatingSequence;
 import hznu.hjc.model.Progress;
 import hznu.hjc.schedule.AbstractSchedule;
 import hznu.hjc.schedule.ScheduleFactory;
-
+/*
+ * 模拟调度
+ * new CPU().SimulationScheduling()
+ * 通过 setSchedule() 修改 AbstractSchedule schedule 来修改调度算法
+ */
 public class CPU
 {
 	private final static String fileName = "C:\\Users\\Administrator\\Desktop\\input.txt";
@@ -25,6 +25,15 @@ public class CPU
 	public CPU()
 	{
 		progresses = new ArrayList<>();
+	}
+	
+	/*
+	 * 模拟调度
+	 */	
+	public void SimulationScheduling()
+	{
+		init();		//初始化
+		schedule.paintResult();		//调度 并输出结果
 	}
 
 	private void init()
@@ -75,11 +84,5 @@ public class CPU
 		Scanner scan = new Scanner(System.in);
 		choice = scan.nextInt();
 		this.schedule = ScheduleFactory.getSchedule(choice, progresses);
-	}
-
-	public void SimulationScheduling()
-	{
-		init();
-		schedule.paintResult();
 	}
 }

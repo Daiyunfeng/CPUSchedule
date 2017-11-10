@@ -5,7 +5,11 @@ import java.util.PriorityQueue;
 
 import hznu.hjc.model.OperatingSequence;
 import hznu.hjc.model.Progress;
-
+/**
+ * 最短剩余抢占
+ * @author Administrator
+ * @data 2017年11月10日
+ */
 public class ShortestRemainingTimeFirstSchedule extends AbstractSchedule
 {
 

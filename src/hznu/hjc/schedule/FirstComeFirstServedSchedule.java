@@ -1,9 +1,6 @@
 package hznu.hjc.schedule;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import hznu.hjc.model.OperatingSequence;
 import hznu.hjc.model.Progress;
