@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import hznu.hjc.model.Progress;
 import hznu.hjc.schedule.AbstractSchedule;
-import hznu.hjc.schedule.ScheduleFactory;
+import hznu.hjc.schedule.factory.ScheduleFactory;
 
 /*
  * 模拟调度

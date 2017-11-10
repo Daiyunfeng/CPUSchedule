@@ -1,8 +1,9 @@
-package hznu.hjc.schedule;
+package hznu.hjc.schedule.factory;
 
 import java.util.List;
 
 import hznu.hjc.model.Progress;
+import hznu.hjc.schedule.*;
 
 /**
  * CPU调度工厂
@@ -30,6 +31,8 @@ public class ScheduleFactory
 			return new ShortestJobFirstSchedule(progresses);
 		case Shortest_Remaining_Time_First:
 			return new ShortestRemainingTimeFirstSchedule(progresses);
+		case Priority:
+			return new PrioritySchedule(progresses);
 		case Round_Robin:
 			return new RoundRobinSchedule(progresses);
 		default:
