@@ -3,6 +3,7 @@ package hznu.hjc.schedule;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import hznu.hjc.model.OperatingSequence;
 import hznu.hjc.model.Progress;
 
 public class ShortestRemainingTimeFirstSchedule extends AbstractSchedule
@@ -20,78 +21,68 @@ public class ShortestRemainingTimeFirstSchedule extends AbstractSchedule
 		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
 		progresses.sort(Progress.SortByArrivedTime);
 		PriorityQueue<Progress> q = new PriorityQueue<>(Progress.SortByRunTime); //ÔËĞĞÊ±¼äÅÅĞòµÄÓÅÏÈ¶ÓÁĞ °ÑÔËĞĞÊ±¼äµ±Ê£ÓàµÄÊ±¼ä
-		int index = 0,count = 0;	//countÎªÒÑµ½´ïµÄ½ø³Ì
+		int index = -1,count = 1,time,endTime;	//countÎªÒÑµ½´ïµÄ½ø³Ì
+		int previousID = -1;		//¼ÇÂ¼ÉÏÒ»¸öµÄÎ¨Ò»id
 		boolean flag = false;		//ÊÇ·ñÈ«²¿½ø¶ÓÁĞ
-		q.add(progresses.get(0));
+		Progress progress;
+		q.add(new Progress(progresses.get(0)));
+		time = progresses.get(0).getArrivedTime();
 		while(q.size()!=0 || count<progresses.size())
-		{
-			
-		}
-	}
-
-
-}
-/*
-priority_queue<Progress> q = priority_queue<Progress>();					//ÔËĞĞÊ±¼äÅÅĞòµÄÓÅÏÈ¶ÓÁĞ °ÑÔËĞĞÊ±¼äµ±Ê£ÓàµÄÊ±¼ä
-		operatingSequences = vector<OperatingSequence>();							//¼ÇÂ¼Ò»ÏÂ
-		string previousName = "";													//±ØĞë±£Ö¤Ã¿¸ö½ø³ÌµÄÃû×Ö²»Í¬
-		int index = 1, count = -1, time = 0;	//count ÎªÔËĞĞË³ĞòµÄÏÂ±ê
-		bool flag = false;
-		q.push(progresses[0]);
-		time = progresses[0].arrivedTime;
-		while (q.size() != 0 || index < n)
 		{
 			if (q.size() == 0)
 			{
 				//µÈ´ıÏÂÒ»¸ö½ø³Ì
-				time = progresses[index].arrivedTime;
-				q.push(progresses[index]);
-				index++;
+				time = progresses.get(count).getArrivedTime();
+				q.add(new Progress(progresses.get(count))); 	//Éî¿½±´
+				count++;
 				continue;
 			}
 			if (flag == true)
 			{
-				Progress progress = q.top();
-				q.pop();
-				if (previousName != progress.name)
+				progress = q.poll();
+				endTime = time + progress.getRunTime();
+				if (previousID != progress.getId())
 				{
-					previousName = progress.name;
-					operatingSequences.push_back(OperatingSequence(progress.name, time, time, false));
-					count++;
-				}
-				time += progress.runTime;
-				operatingSequences[count].endTime = time;
-				operatingSequences[count].isEnd = true;
-			}
-			else
-			{
-				Progress progress = q.top();
-				q.pop();
-				if (previousName != progress.name)
-				{
-					previousName = progress.name;
-					operatingSequences.push_back(OperatingSequence(progress.name, time, time, false));
-					count++;
-				}
-				time++;				//Ä£ÄâÊ±¼äĞøÁËÒ»Ãë
-				operatingSequences[count].endTime = time;
-				progress.runTime--;
-				if (progress.runTime > 0)
-				{
-					q.push(progress);
+					previousID = progress.getId();
+					operatingSequences.add(new OperatingSequence(progress, time, endTime, true));
+					index++;
 				}
 				else
 				{
-					operatingSequences[count].isEnd = true;
+					operatingSequences.get(index).setEndTime(endTime);
+					operatingSequences.get(index).setEnd(true);
 				}
-				if (index < n)	//»¹ÓĞÎ´½øÈëµÄ½ø³Ì
+				time = endTime;
+			}
+			else
+			{
+				progress = q.poll();
+				if (previousID != progress.getId())
 				{
-					while (index < n)
+					previousID = progress.getId();
+					operatingSequences.add(new OperatingSequence(progress, time, time, false));
+					index++;
+				}
+				endTime = time +1;
+				operatingSequences.get(index).setEndTime(endTime);
+				progress.setRunTime(progress.getRunTime()-1);
+				if (progress.getRunTime() > 0)
+				{
+					q.add(progress);
+				}
+				else
+				{
+					operatingSequences.get(index).setEnd(true);
+				}
+				time++;
+				if(count < progresses.size())
+				{
+					while(count<progresses.size())
 					{
-						if (progresses[index].arrivedTime <= time)
+						if (progresses.get(count).getArrivedTime() <= time)
 						{
-							q.push(progresses[index]);
-							index++;
+							q.add(new Progress(progresses.get(count))); 	//Éî¿½±´
+							count++;
 						}
 						else
 						{
@@ -99,10 +90,12 @@ priority_queue<Progress> q = priority_queue<Progress>();					//ÔËĞĞÊ±¼äÅÅĞòµÄÓÅÏ
 						}
 					}
 				}
-				else	//ËùÓĞ½ø³Ì¶¼ÔÚ¶ÓÁĞÖĞ Ö±½ÓË³ĞòÖ´ĞĞ ²»ÓÃÅĞ¶ÏÊÇ·ñÓĞ½ø³Ìµ½´ï
+				else
 				{
-					flag = true;
+					flag= false;
 				}
 			}
 		}
-*/
+	}
+
+}

@@ -21,6 +21,8 @@ public class ScheduleFactory
 		{
 		case First_Come_First_Served:
 			return new FirstComeFirstServedSchedule(progresses);
+		case Shortest_Remaining_Time_First:
+			return new ShortestRemainingTimeFirstSchedule(progresses);
 		default:
 			throw new Exception("ID错误 没有此调度算法");
 		}

@@ -73,5 +73,15 @@ public class Progress
 		this.runTime = runTime;
 		waittingTime = 0;
 	}
-
+	
+	public Progress(Progress progress)
+	{
+		this.id = progress.id;
+		this.name = progress.name;
+		this.arrivedTime = progress.arrivedTime;
+		this.priority = progress.priority;
+		this.runTime = progress.runTime;
+		this.waittingTime = progress.waittingTime;
+	}
+	
 }

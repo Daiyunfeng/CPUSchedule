@@ -49,11 +49,13 @@ public abstract class AbstractSchedule
 				time = operatingSequences.get(i).getBeginTime();
 				System.out.print(time+"--");
 			}
-			if (operatingSequences.get(i).getEnd())
+			if (operatingSequences.get(i).getEnd() == true)
 			{
 				//进程的结束时间减去到达时间减去运行时间。
 				index = map.get(operatingSequences.get(i).getProgressId());
 				progresses.get(index).setWaittingTime(operatingSequences.get(i).getEndTime()-progresses.get(index).getArrivedTime()-progresses.get(index).getRunTime());
+//				System.out.println();
+//				System.out.println(operatingSequences.get(i).getEndTime()+" "+progresses.get(index).getArrivedTime()+" "+progresses.get(index).getRunTime());
 			}
 			time = operatingSequences.get(i).getEndTime();
 			System.out.print(operatingSequences.get(i).getProgressName()+"--"+time);
