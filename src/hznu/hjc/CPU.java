@@ -10,10 +10,11 @@ import java.util.Scanner;
 import hznu.hjc.model.Progress;
 import hznu.hjc.schedule.AbstractSchedule;
 import hznu.hjc.schedule.ScheduleFactory;
+
 /*
- * Ä£Äâµ÷¶È
+ * æ¨¡æ‹Ÿè°ƒåº¦
  * new CPU().SimulationScheduling()
- * Í¨¹ı setSchedule() ĞŞ¸Ä AbstractSchedule schedule À´ĞŞ¸Äµ÷¶ÈËã·¨
+ * é€šè¿‡ setSchedule() ä¿®æ”¹ AbstractSchedule schedule æ¥ä¿®æ”¹è°ƒåº¦ç®—æ³•
  */
 public class CPU
 {
@@ -26,14 +27,14 @@ public class CPU
 	{
 		progresses = new ArrayList<>();
 	}
-	
+
 	/*
-	 * Ä£Äâµ÷¶È
-	 */	
+	 * æ¨¡æ‹Ÿè°ƒåº¦
+	 */
 	public void SimulationScheduling()
 	{
-		init();		//³õÊ¼»¯
-		schedule.paintResult();		//µ÷¶È ²¢Êä³ö½á¹û
+		init(); // åˆå§‹åŒ–
+		schedule.paintResult(); // è°ƒåº¦ å¹¶è¾“å‡ºç»“æœ
 	}
 
 	private void init()
@@ -45,7 +46,7 @@ public class CPU
 		}
 		catch (Exception e)
 		{
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 			e.printStackTrace();
 		}
 	}
@@ -73,13 +74,13 @@ public class CPU
 
 	private void setSchedule() throws Exception
 	{
-		System.out.println("µ÷¶ÈËã·¨:");
+		System.out.println("è°ƒåº¦ç®—æ³•:");
 		System.out.println("0:First Come First Served");
 		System.out.println("1:Shortest Job First");
 		System.out.println("2:Shortest Remaining Time First");
-		System.out.println("3:Priority ·ÇÇÀÕ¼");
+		System.out.println("3:Priority éæŠ¢å ");
 		System.out.println("4:Round Robin");
-		System.out.println("Ñ¡ÔñCPUµ÷¶ÈËã·¨");
+		System.out.println("é€‰æ‹©CPUè°ƒåº¦ç®—æ³•");
 		int choice;
 		Scanner scan = new Scanner(System.in);
 		choice = scan.nextInt();

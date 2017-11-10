@@ -5,10 +5,12 @@ import java.util.PriorityQueue;
 
 import hznu.hjc.model.OperatingSequence;
 import hznu.hjc.model.Progress;
+
 /**
- * ×î¶ÌÊ£ÓàÇÀÕ¼
+ * æœ€çŸ­å‰©ä½™æŠ¢å 
+ * 
  * @author Administrator
- * @data 2017Äê11ÔÂ10ÈÕ
+ * @data 2017å¹´11æœˆ10æ—¥
  */
 public class ShortestRemainingTimeFirstSchedule extends AbstractSchedule
 {
@@ -16,28 +18,29 @@ public class ShortestRemainingTimeFirstSchedule extends AbstractSchedule
 	public ShortestRemainingTimeFirstSchedule(List<Progress> progresses)
 	{
 		super(progresses);
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 	}
 
 	@Override
 	protected void schedule()
 	{
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		progresses.sort(Progress.SortByArrivedTime);
-		PriorityQueue<Progress> q = new PriorityQueue<>(Progress.SortByRunTime); //ÔËĞĞÊ±¼äÅÅĞòµÄÓÅÏÈ¶ÓÁĞ °ÑÔËĞĞÊ±¼äµ±Ê£ÓàµÄÊ±¼ä
-		int index = -1,count = 1,time,endTime;	//countÎªÒÑµ½´ïµÄ½ø³Ì
-		int previousID = -1;		//¼ÇÂ¼ÉÏÒ»¸öµÄÎ¨Ò»id
-		boolean flag = false;		//ÊÇ·ñÈ«²¿½ø¶ÓÁĞ
+		PriorityQueue<Progress> q = new PriorityQueue<>(Progress.SortByRunTime); // è¿è¡Œæ—¶é—´æ’åºçš„ä¼˜å…ˆé˜Ÿåˆ—
+																					// æŠŠè¿è¡Œæ—¶é—´å½“å‰©ä½™çš„æ—¶é—´
+		int index = -1, count = 1, time, endTime; // countä¸ºå·²åˆ°è¾¾çš„è¿›ç¨‹
+		int previousID = -1; // è®°å½•ä¸Šä¸€ä¸ªçš„å”¯ä¸€id
+		boolean flag = false; // æ˜¯å¦å…¨éƒ¨è¿›é˜Ÿåˆ—
 		Progress progress;
 		q.add(new Progress(progresses.get(0)));
 		time = progresses.get(0).getArrivedTime();
-		while(q.size()!=0 || count<progresses.size())
+		while (q.size() != 0 || count < progresses.size())
 		{
 			if (q.size() == 0)
 			{
-				//µÈ´ıÏÂÒ»¸ö½ø³Ì
+				// ç­‰å¾…ä¸‹ä¸€ä¸ªè¿›ç¨‹
 				time = progresses.get(count).getArrivedTime();
-				q.add(new Progress(progresses.get(count))); 	//Éî¿½±´
+				q.add(new Progress(progresses.get(count))); // æ·±æ‹·è´
 				count++;
 				continue;
 			}
@@ -67,9 +70,9 @@ public class ShortestRemainingTimeFirstSchedule extends AbstractSchedule
 					operatingSequences.add(new OperatingSequence(progress, time, time, false));
 					index++;
 				}
-				endTime = time +1;
+				endTime = time + 1;
 				operatingSequences.get(index).setEndTime(endTime);
-				progress.setRunTime(progress.getRunTime()-1);
+				progress.setRunTime(progress.getRunTime() - 1);
 				if (progress.getRunTime() > 0)
 				{
 					q.add(progress);
@@ -79,13 +82,13 @@ public class ShortestRemainingTimeFirstSchedule extends AbstractSchedule
 					operatingSequences.get(index).setEnd(true);
 				}
 				time++;
-				if(count < progresses.size())
+				if (count < progresses.size())
 				{
-					while(count<progresses.size())
+					while (count < progresses.size())
 					{
 						if (progresses.get(count).getArrivedTime() <= time)
 						{
-							q.add(new Progress(progresses.get(count))); 	//Éî¿½±´
+							q.add(new Progress(progresses.get(count))); // æ·±æ‹·è´
 							count++;
 						}
 						else
@@ -96,7 +99,7 @@ public class ShortestRemainingTimeFirstSchedule extends AbstractSchedule
 				}
 				else
 				{
-					flag= false;
+					flag = false;
 				}
 			}
 		}

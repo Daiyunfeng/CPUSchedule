@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * ÇÀÕ¼Ê½µÄ²»ºÃÖ±½Ó±£´æÔËĞĞË³Ğò Ê¹ÓÃOperatingSequence´æ´¢
+ * æŠ¢å å¼çš„ä¸å¥½ç›´æ¥ä¿å­˜è¿è¡Œé¡ºåº ä½¿ç”¨OperatingSequenceå­˜å‚¨
  * 
  * @author Administrator
- * @data 2017Äê11ÔÂ9ÈÕ
+ * @data 2017å¹´11æœˆ9æ—¥
  */
 @Getter
 @Setter
@@ -18,10 +18,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class OperatingSequence
 {
-	private int progressId; // ½ø³ÌÎ¨Ò»id
-	private String progressName; // ½ø³ÌÃû
+	private int progressId; // è¿›ç¨‹å”¯ä¸€id
+	private String progressName; // è¿›ç¨‹å
 	private int beginTime, endTime;
-	private Boolean end; // ¼ÇÂ¼´Ë´ÎÊÇ·ñ½áÊø
+	private Boolean end; // è®°å½•æ­¤æ¬¡æ˜¯å¦ç»“æŸ
 
 	public OperatingSequence(Progress progress, int beginTime, int endTime, Boolean end)
 	{

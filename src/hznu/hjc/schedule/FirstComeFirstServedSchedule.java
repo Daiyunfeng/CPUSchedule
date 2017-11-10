@@ -10,26 +10,26 @@ public class FirstComeFirstServedSchedule extends AbstractSchedule
 	public FirstComeFirstServedSchedule(List<Progress> progresses)
 	{
 		super(progresses);
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 	}
 
 	@Override
 	public void schedule()
 	{
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		progresses.sort(Progress.SortByArrivedTime);
 		Progress progress;
-		int time = progresses.get(0).getArrivedTime(),endTime;
-		for(int i =0;i<progresses.size();i++)
+		int time = progresses.get(0).getArrivedTime(), endTime;
+		for (int i = 0; i < progresses.size(); i++)
 		{
 			progress = progresses.get(i);
-			if(time<progress.getArrivedTime())
+			if (time < progress.getArrivedTime())
 			{
 				time = progress.getArrivedTime();
 			}
 			endTime = time + progress.getRunTime();
 			this.operatingSequences.add(new OperatingSequence(progress, time, endTime, true));
-			time =endTime;
+			time = endTime;
 		}
 	}
 }

@@ -6,10 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Ä£ÄâµÄ½ø³Ì Ä¬ÈÏµÄÅÅĞò·½·¨
- * Ä¬ÈÏ°´arrivedTime´ÓĞ¡µ½´óÀ´ÅÅĞò
+ * æ¨¡æ‹Ÿçš„è¿›ç¨‹ é»˜è®¤çš„æ’åºæ–¹æ³• é»˜è®¤æŒ‰arrivedTimeä»å°åˆ°å¤§æ¥æ’åº
+ * 
  * @author Administrator
- * @data 2017Äê11ÔÂ9ÈÕ
+ * @data 2017å¹´11æœˆ9æ—¥
  */
 @Getter
 @Setter
@@ -17,22 +17,22 @@ public class Progress
 {
 	private String name;
 	private int id, arrivedTime, priority, runTime, waittingTime;
-	
+
 	/**
-	 * arrivedTime´ÓĞ¡µ½´ó
+	 * arrivedTimeä»å°åˆ°å¤§
 	 */
 	public static Comparator<Progress> SortByArrivedTime = new Comparator<Progress>()
 	{
 		@Override
 		public int compare(Progress o1, Progress o2)
 		{
-			// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+			// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 			return o1.arrivedTime - o2.arrivedTime;
 		}
 	};
-			
+
 	/**
-	 * priority ´ÓĞ¡µ½´ó
+	 * priority ä»å°åˆ°å¤§
 	 */
 	public static Comparator<Progress> SortByPriority = new Comparator<Progress>()
 	{
@@ -40,13 +40,13 @@ public class Progress
 		@Override
 		public int compare(Progress o1, Progress o2)
 		{
-			// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+			// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 			return o1.priority - o2.priority;
 		}
 	};
 
 	/**
-	 * runTime ´ÓĞ¡µ½´ó
+	 * runTime ä»å°åˆ°å¤§
 	 */
 	public static Comparator<Progress> SortByRunTime = new Comparator<Progress>()
 	{
@@ -54,11 +54,11 @@ public class Progress
 		@Override
 		public int compare(Progress o1, Progress o2)
 		{
-			// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+			// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 			return o1.runTime - o2.runTime;
 		}
 	};
-	
+
 	public Progress()
 	{
 		waittingTime = 0;
@@ -73,7 +73,7 @@ public class Progress
 		this.runTime = runTime;
 		waittingTime = 0;
 	}
-	
+
 	public Progress(Progress progress)
 	{
 		this.id = progress.id;
@@ -83,5 +83,5 @@ public class Progress
 		this.runTime = progress.runTime;
 		this.waittingTime = progress.waittingTime;
 	}
-	
+
 }

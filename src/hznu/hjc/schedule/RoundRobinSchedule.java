@@ -1,41 +1,93 @@
 package hznu.hjc.schedule;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
 
+import hznu.hjc.model.OperatingSequence;
 import hznu.hjc.model.Progress;
 import lombok.Getter;
 import lombok.Setter;
+
 /**
- * ÂÖ×ª ¶îÍâ¼ÓÁËÒ»¸öÊ±¼äÆ¬ÊôĞÔ
- * ÔÚ¹¹Ôìº¯Êıµ÷ÓÃinit()³õÊ¼»¯
+ * è½®è½¬ é¢å¤–åŠ äº†ä¸€ä¸ªæ—¶é—´ç‰‡å±æ€§ åœ¨æ„é€ å‡½æ•°è°ƒç”¨init()åˆå§‹åŒ–
+ * 
  * @author Administrator
- * @data 2017Äê11ÔÂ10ÈÕ
+ * @data 2017å¹´11æœˆ10æ—¥
  */
 @Getter
 @Setter
 public class RoundRobinSchedule extends AbstractSchedule
 {
-	private int timeSlicing;//Ê±¼äÆ¬
+	private int timeSlicing;// æ—¶é—´ç‰‡
+
 	public RoundRobinSchedule(List<Progress> progresses)
 	{
 		super(progresses);
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 		init();
 	}
 
 	private void init()
 	{
 		Scanner in = new Scanner(System.in);
-		System.out.println("ÊäÈëÊ±¼äÆ¬:");
-		timeSlicing =in.nextInt();
+		System.out.println("è¾“å…¥æ—¶é—´ç‰‡:");
+		timeSlicing = in.nextInt();
 	}
-	
+
 	@Override
 	protected void schedule()
 	{
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-		
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
+		progresses.sort(Progress.SortByArrivedTime);
+		Queue<Progress> q = new LinkedList<Progress>();
+		int count = 0, time, endTime;
+		Progress progress;
+		Boolean flag ;
+		q.offer(new Progress(progresses.get(count++)));
+		time = progresses.get(0).getArrivedTime();
+		while (q.size() != 0 || count < progresses.size())
+		{
+			if (q.size() == 0)
+			{
+				// ç­‰å¾…ä¸‹ä¸€ä¸ªè¿›ç¨‹
+				time = progresses.get(count).getArrivedTime();
+				q.add(new Progress(progresses.get(count))); // æ·±æ‹·è´
+				count++;
+				continue;
+			}
+			progress = q.poll();
+			if (progress.getRunTime() <= timeSlicing) // ä¸€ä¸ªæ—¶é—´ç‰‡å°±ç»“æŸäº†
+			{
+				flag =true;
+				endTime = time + progress.getRunTime();
+				operatingSequences.add(new OperatingSequence(progress, time, endTime, true));
+			}
+			else
+			{
+				flag =false;
+				endTime = time + timeSlicing;
+				operatingSequences.add(new OperatingSequence(progress, time, endTime, true));
+				progress.setRunTime(progress.getRunTime() - timeSlicing);
+			}
+			time = endTime;
+			while (count < progresses.size())
+			{
+				if (progresses.get(count).getArrivedTime() <= time)
+				{
+					q.add(new Progress(progresses.get(count))); // æ·±æ‹·è´
+					count++;
+				}
+				else
+				{
+					break;
+				}
+			}
+			if(!flag)
+			{
+				q.offer(progress);	//æ”¾åœ¨é˜Ÿåˆ—æœ€å
+			}
+		}
 	}
-
 }

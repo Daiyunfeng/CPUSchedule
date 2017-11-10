@@ -9,63 +9,69 @@ import hznu.hjc.model.OperatingSequence;
 import hznu.hjc.model.Progress;
 
 /**
- * À©Õ¹Ö»ĞèÒªÊµÏÖschedule
- * operatingSequencesÖĞÖ»ĞèÒª±£´æ½ø³ÌĞÅÏ¢ ÖĞ¼äµ÷¶È¿ÕÏĞÊ±¼ä²»ĞèÒª
- * È»ºóÔÚScheduleFactoryÖĞÌí¼ÓÕâ¸öÀà¾ÍºÃ
+ * æ‰©å±•åªéœ€è¦å®ç°schedule operatingSequencesä¸­åªéœ€è¦ä¿å­˜è¿›ç¨‹ä¿¡æ¯ ä¸­é—´è°ƒåº¦ç©ºé—²æ—¶é—´ä¸éœ€è¦
+ * ç„¶ååœ¨ScheduleFactoryä¸­æ·»åŠ è¿™ä¸ªç±»å°±å¥½
+ * 
  * @author Administrator
- * @data 2017Äê11ÔÂ9ÈÕ
+ * @data 2017å¹´11æœˆ9æ—¥
  */
 public abstract class AbstractSchedule
 {
 	protected List<Progress> progresses;
-	protected List<OperatingSequence> operatingSequences;	//Ö»ĞèÒª¼ÇÂ¼Ã¿¸ö½ø³ÌÔÚÊ²Ã´Ê±ºòÔËĞĞÊ²Ã´Ê±ºò½áÊø¾ÍºÃ ²»ĞèÒª¿¼ÂÇ¿ÕÓà
-	
+	protected List<OperatingSequence> operatingSequences; // åªéœ€è¦è®°å½•æ¯ä¸ªè¿›ç¨‹åœ¨ä»€ä¹ˆæ—¶å€™è¿è¡Œä»€ä¹ˆæ—¶å€™ç»“æŸå°±å¥½
+															// ä¸éœ€è¦è€ƒè™‘ç©ºä½™
+
 	public AbstractSchedule(List<Progress> progresses)
 	{
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 		this.progresses = progresses;
 		this.operatingSequences = new ArrayList<>();
 	}
-	
+
 	protected abstract void schedule();
-	
+
 	public void paintResult()
 	{
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		schedule();
 		Map<Integer, Integer> map = new HashMap<>();
 		for (int i = 0; i < progresses.size(); i++)
 		{
+			System.out.println(progresses.get(i).getName() + " åˆ°è¾¾æ—¶é—´:" + progresses.get(i).getArrivedTime() + " ä¼˜å…ˆçº§"
+					+ progresses.get(i).getPriority() + " è¿è¡Œæ—¶é—´" + progresses.get(i).getRunTime());
 			map.put(progresses.get(i).getId(), i);
 		}
-		int time = 0,index;
+		int time = 0, index;
 		System.out.print(time);
 		for (int i = 0; i < operatingSequences.size(); i++)
 		{
 			System.out.print("--");
 			if (time < operatingSequences.get(i).getBeginTime())
 			{
-				System.out.print("¿ÕÏĞ--");
+				System.out.print("ç©ºé—²--");
 				time = operatingSequences.get(i).getBeginTime();
-				System.out.print(time+"--");
+				System.out.print(time + "--");
 			}
 			if (operatingSequences.get(i).getEnd() == true)
 			{
-				//½ø³ÌµÄ½áÊøÊ±¼ä¼õÈ¥µ½´ïÊ±¼ä¼õÈ¥ÔËĞĞÊ±¼ä¡£
+				// è¿›ç¨‹çš„ç»“æŸæ—¶é—´å‡å»åˆ°è¾¾æ—¶é—´å‡å»è¿è¡Œæ—¶é—´ã€‚
 				index = map.get(operatingSequences.get(i).getProgressId());
-				progresses.get(index).setWaittingTime(operatingSequences.get(i).getEndTime()-progresses.get(index).getArrivedTime()-progresses.get(index).getRunTime());
-//				System.out.println();
-//				System.out.println(operatingSequences.get(i).getEndTime()+" "+progresses.get(index).getArrivedTime()+" "+progresses.get(index).getRunTime());
+				progresses.get(index).setWaittingTime(operatingSequences.get(i).getEndTime()
+						- progresses.get(index).getArrivedTime() - progresses.get(index).getRunTime());
+				// System.out.println();
+				// System.out.println(operatingSequences.get(i).getEndTime()+"
+				// "+progresses.get(index).getArrivedTime()+"
+				// "+progresses.get(index).getRunTime());
 			}
 			time = operatingSequences.get(i).getEndTime();
-			System.out.print(operatingSequences.get(i).getProgressName()+"--"+time);
+			System.out.print(operatingSequences.get(i).getProgressName() + "--" + time);
 		}
 		System.out.println();
 		double sum = 0;
 		for (int i = 0; i < progresses.size(); i++)
 		{
 			sum += progresses.get(i).getWaittingTime();
-			System.out.println(progresses.get(i).getName()+" watiting time:"+progresses.get(i).getWaittingTime());
+			System.out.println(progresses.get(i).getName() + " watiting time:" + progresses.get(i).getWaittingTime());
 		}
 		sum /= progresses.size();
 		System.out.println("Average watiting time:" + sum);
