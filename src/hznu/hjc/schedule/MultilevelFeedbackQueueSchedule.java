@@ -34,11 +34,11 @@ public class MultilevelFeedbackQueueSchedule extends AbstractSchedule
 	private void init()
 	{
 		Scanner in = new Scanner(System.in);
-		System.out.print("最高优先级队列优先级范围1-");
+		System.out.print("最高优先级队列优先级范围(左闭右开)1-");
 		priority1 = in.nextInt();
 		System.out.print("最高优先级队列时间片:");
 		timeSlicing1 = in.nextInt();
-		System.out.print("第二优先级队列优先级范围" + priority1 + "-");
+		System.out.print("第二优先级队列优先级范围(左闭右开)" + priority1 + "-");
 		priority2 = in.nextInt();
 		System.out.print("第二优先级队列时间片(需要大于最高优先级队列时间片):");
 		timeSlicing2 = in.nextInt();
